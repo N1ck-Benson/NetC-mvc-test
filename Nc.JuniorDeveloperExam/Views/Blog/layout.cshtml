@@ -1,9 +1,11 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Top 5 Considerations for a Content-First Design Approach - NetConstruct Blog</title>
+    <title>NetConstruct Blog</title>
     <link rel="stylesheet" type="text/css" href="/Assets/Styles/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/Assets/Styles/custom.css" />
 </head>
@@ -44,7 +46,9 @@
                 <hr>
 
                 <!-- Preview Image -->
-                <img class="img-fluid rounded" src="@RenderSection("image")">
+                <div class="img-placeholder">
+                    <img src="@RenderSection("image")" alt="Image"/>
+                </div>
 
                 <hr>
 

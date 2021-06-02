@@ -21,7 +21,7 @@
         public string Title { get; set; }
 
         [JsonProperty("image")]
-        public Uri Image { get; set; }
+        public string Image { get; set; }
 
         [JsonProperty("htmlContent")]
         public string HtmlContent { get; set; }

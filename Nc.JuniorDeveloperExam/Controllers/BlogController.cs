@@ -25,7 +25,9 @@ namespace Nc.JuniorDeveloperExam.Controllers
             ViewData["image"] = jsonData.BlogPosts[id - 1].Image;
             ViewData["htmlContent"] = jsonData.BlogPosts[id - 1].HtmlContent;
 
-            return View();
+            BlogPost blogPost = jsonData.BlogPosts[id - 1];
+
+            return View(blogPost);
         }
     }
 }
