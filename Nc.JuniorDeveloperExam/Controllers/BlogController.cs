@@ -20,11 +20,6 @@ namespace Nc.JuniorDeveloperExam.Controllers
             var json = webClient.DownloadString(@"/Users/nickbenson/Documents/devLocal/NetConstruct/Nc.JuniorDeveloperExam/Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
             JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(json);
 
-            ViewData["title"] = jsonData.BlogPosts[id - 1].Title;
-            ViewData["date"] = jsonData.BlogPosts[id - 1].Date;
-            ViewData["image"] = jsonData.BlogPosts[id - 1].Image;
-            ViewData["htmlContent"] = jsonData.BlogPosts[id - 1].HtmlContent;
-
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
 
             return View(blogPost);
