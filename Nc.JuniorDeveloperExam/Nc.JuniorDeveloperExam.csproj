@@ -8,6 +8,8 @@
     <Folder Include="App_Data\" />
     <Folder Include="Assets\" />
     <Folder Include="Views\Blog\" />
+    <Folder Include="Assets\Styles\" />
+    <Folder Include="Assets\Scripts\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
