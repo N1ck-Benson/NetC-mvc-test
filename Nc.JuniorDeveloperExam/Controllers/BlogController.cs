@@ -1,34 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using System.Net;
 using Microsoft.AspNetCore.Mvc;
+using Nc.JuniorDeveloperExam.Models;
 using Newtonsoft.Json;
 
 namespace Nc.JuniorDeveloperExam.Controllers
 {
     public class BlogController : Controller
     {
-        // GET: /blogpost
-        public string Index()
-        {
-            return "Hi! Please go to /blogpost/view/1 to view a blogpost :)";
-        }
-
         // GET: /blog/blogpost/{id}
-        // First return the title and id on the id endpoint,
-        // then pass the rest of the data through
         public ActionResult BlogPost(int id)
         {
-            // id is correct but isn't being passed through to viewdata
-            
-            //string title = "BlogPost";
-            ViewData["id"] = id;
-            ViewData["title"] = "BlogPost";
+
+            // The WebClient class is using System.Net.    
+            // It "provides common methods for sending data to and receiving data from a resource identified by a URI".
+            // Could also do File.ReadAllText, using System.IO
+
+            var webClient = new WebClient();
+            var json = webClient.DownloadString(@"/Users/nickbenson/Documents/devLocal/NetConstruct/Nc.JuniorDeveloperExam/Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
+            JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(json);
+
+            ViewData["title"] = jsonData.BlogPosts[id - 1].Title;
+            ViewData["date"] = jsonData.BlogPosts[id - 1].Date;
+            ViewData["image"] = jsonData.BlogPosts[id - 1].Image;
+            ViewData["htmlContent"] = jsonData.BlogPosts[id - 1].HtmlContent;
 
             return View();
         }
-        
     }
 }

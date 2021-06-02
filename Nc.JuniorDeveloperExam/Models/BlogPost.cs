@@ -1,9 +1,47 @@
-﻿using System;
-namespace Nc.JuniorDeveloperExam.Models
+﻿namespace Nc.JuniorDeveloperExam.Models
 {
-    public class BlogPost
+    using System;
+    using Newtonsoft.Json;
+
+    public partial class JsonData
     {
-        public int id { get; set; }
-        public string title { get; set; }
+        [JsonProperty("blogPosts")]
+        public BlogPost[] BlogPosts { get; set; }
+    }
+
+    public partial class BlogPost
+    {
+        [JsonProperty("id")]
+        public long Id { get; set; }
+
+        [JsonProperty("date")]
+        public DateTimeOffset Date { get; set; }
+
+        [JsonProperty("title")]
+        public string Title { get; set; }
+
+        [JsonProperty("image")]
+        public Uri Image { get; set; }
+
+        [JsonProperty("htmlContent")]
+        public string HtmlContent { get; set; }
+
+        [JsonProperty("comments", NullValueHandling = NullValueHandling.Ignore)]
+        public Comment[] Comments { get; set; }
+    }
+
+    public partial class Comment
+    {
+        [JsonProperty("name")]
+        public string Name { get; set; }
+
+        [JsonProperty("date")]
+        public DateTimeOffset Date { get; set; }
+
+        [JsonProperty("emailAddress")]
+        public string EmailAddress { get; set; }
+
+        [JsonProperty("message")]
+        public string Message { get; set; }
     }
 }
