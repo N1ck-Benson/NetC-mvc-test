@@ -24,5 +24,13 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             return View(blogPost);
         }
+
+        public ActionResult PostComment(int id, string name, string email, string message)
+        {
+            Debug.WriteLine(id, "id");
+            // thinks the id is 1, whichever page you send post from
+            // name, email address, message (add date in controller)
+            return Content("Comment posted to id ");
+        }
     }
 }
