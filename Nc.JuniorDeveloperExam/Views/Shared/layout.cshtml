@@ -29,48 +29,9 @@
             </div>
         </div>
     </nav>
+    <!--Buffer div to create space below navbar-->
     <div class="mt-5"></div>
-    <div class="container">
-        <div class="row">
-
-            <!-- Blog post content -->
-            <div class="col-lg-12">
-                <!-- Title -->
-                <h1 class="mt-4">@RenderSection("title")</h1>
-
-                <hr>
-
-                <!-- Date/Time -->
-                <p>Posted on @RenderSection("date")</p>
-
-                <hr>
-
-                <!-- Preview Image -->
-                <figure class="figure">
-                    <img class="img-fluid" src="@RenderSection("image")" alt="Image"/>
-                </figure>
-
-                <hr>
-
-                <!-- Post Content -->
-                @RenderSection("content")
-
-                <hr>
-
-                <!-- Blog post comment form -->
-                <div class="card my-4">
-                    <h5 class="card-header">Leave a Comment:</h5>
-                    @RenderSection("commentForm")
-                </div>
-
-                <!-- Blog post comments -->
-                <div>
-                    <h3>Comments</h3>
-                    @RenderSection("comments")
-                </div>
-
-            </div>
-        </div>
-    </div>
+    <div class="mt-5"></div>
+    @RenderBody()
 </body>
 </html>
