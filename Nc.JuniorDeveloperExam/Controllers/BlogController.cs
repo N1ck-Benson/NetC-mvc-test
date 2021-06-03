@@ -36,8 +36,10 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             //deserialize the json
             var webClient = new WebClient();
-            // make this a relative path!
-            string json = webClient.DownloadString(@"/Users/nickbenson/Documents/devLocal/NetConstruct/Nc.JuniorDeveloperExam/Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
+            // Relative paths in .NET are based from the binary file
+            // from which the project is running, outputted here:
+            // [directory of .csproj]/bin/debug
+            string json = webClient.DownloadString(@"../../App_Data/Blog-Posts.json");
             JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(json);
 
             //add the new comment
@@ -54,7 +56,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
             json = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
 
             // write json back to Blog-Posts.json
-            System.IO.File.WriteAllText(@"/Users/nickbenson/Documents/devLocal/NetConstruct/Nc.JuniorDeveloperExam/Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json", json);
+            System.IO.File.WriteAllText(@"../../App_Data/Blog-Posts.json", json);
 
             return Content("Comment posted successfully!");
         }

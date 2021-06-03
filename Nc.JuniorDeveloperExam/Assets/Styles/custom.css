@@ -7,7 +7,7 @@
 }
 
 .img-placeholder {
-    background-image: url("/Users/nickbenson/Documents/devLocal/NetConstruct/Nc.JuniorDeveloperExam/Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
+    background-image: url("../../Assets/Images/placeholder-image.png");
     height: 300px;
     width: 300px;
     background-repeat: no-repeat;
