@@ -28,6 +28,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
             return View(blogPost);
         }
 
+        // POST: /blog/comment/id
         public ActionResult PostComment(int id, [Bind("Name, EmailAddress, Message")] Comment comment)
         {
             DateTime date = DateTime.Now;
