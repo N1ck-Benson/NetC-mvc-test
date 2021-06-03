@@ -19,8 +19,10 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             var webClient = new WebClient();
 
-            // make this a relative path!
-            var json = webClient.DownloadString(@"/Users/nickbenson/Documents/devLocal/NetConstruct/Nc.JuniorDeveloperExam/Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
+            // Relative paths in .NET are based from the binary file
+            // from which the project is running, outputted here:
+            // [directory of .csproj]/bin/debug
+            var json = webClient.DownloadString(@"../Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
             JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(json);
 
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
@@ -36,19 +38,17 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             //deserialize the json
             var webClient = new WebClient();
-            // Relative paths in .NET are based from the binary file
-            // from which the project is running, outputted here:
-            // [directory of .csproj]/bin/debug
-            string json = webClient.DownloadString(@"../../App_Data/Blog-Posts.json");
+            string json = webClient.DownloadString(@"../Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
             JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(json);
 
             //add the new comment
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
-            if(blogPost.GetType().GetProperty("comments") == null)
+            if(blogPost.GetType().GetProperty("Comments") == null)
             {
                 blogPost.Comments = new Comment[] { comment };
             } else
             {
+                // error: throwing 'index out of range' (which it is...)
                 blogPost.Comments[blogPost.Comments.Length + 1] = comment;
             }
 
@@ -56,7 +56,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
             json = JsonConvert.SerializeObject(jsonData, Formatting.Indented);
 
             // write json back to Blog-Posts.json
-            System.IO.File.WriteAllText(@"../../App_Data/Blog-Posts.json", json);
+            System.IO.File.WriteAllText(@"../Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json", json);
 
             return Content("Comment posted successfully!");
         }

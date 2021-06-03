@@ -29,6 +29,8 @@
         @{
             if (Model.GetType().GetProperty("Comments") != null)
             {
+                // sort the comments by date
+
                 foreach (var comment in Model.Comments)
                 {
                     <div class="media mb-4">
