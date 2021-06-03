@@ -15,19 +15,25 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             // The WebClient class is using System.Net.    
             // It "provides common methods for sending data to and receiving data from a resource identified by a URI".
-            // Could have used System.IO but couldn't make it work for some reason..
+            // Could have used System.IO but couldn't make it work for some reason...
 
             var webClient = new WebClient();
 
-            // Relative paths in .NET are based from the binary file
-            // from which the project is running, outputted here:
-            // [directory of .csproj]/bin/debug
             var json = webClient.DownloadString(@"../Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json");
             JsonData jsonData = JsonConvert.DeserializeObject<JsonData>(json);
 
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
 
-            return View(blogPost);
+            try
+            {
+                blogPost.Comments.Sort((x, y) => y.Date.CompareTo(x.Date));
+
+                return View(blogPost);
+            }
+            catch(NullReferenceException)
+            {
+                return View(blogPost);
+            }
         }
 
         // POST: /blog/comment/id

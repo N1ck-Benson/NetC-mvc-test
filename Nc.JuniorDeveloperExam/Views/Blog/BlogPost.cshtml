@@ -11,7 +11,7 @@
 
     @section date
     {
-        @Model.Date
+        @Model.Date.ToString("MMMM dd, yyyy")
     }
 
     @section image
@@ -29,20 +29,18 @@
         @{
             try
             {
-                // sort the comments by date
-
                 foreach (var comment in Model.Comments)
                 {
                     <div class="media mb-4">
                         <img class="d-flex mr-3 rounded-circle user-avatar" src="https://eu.ui-avatars.com/api/?name=Steven+Barker" alt="Steven Barker">
                         <div class="media-body">
-                            <h5 class="mt-0">@comment.Name<small><em>(@comment.Date)</em></small></h5>
+                            <h5 class="mt-0">@comment.Name<small><em>(@comment.Date.ToString("MMMM d, yyyy"))</em></small></h5>
                             @comment.Message
                         </div>
                     </div>
                 }
             }
-            catch
+            catch(NullReferenceException)
             {
                 <div class="media mb-4">
                     <div class="media-body">
