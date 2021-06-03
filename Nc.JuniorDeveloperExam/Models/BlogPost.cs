@@ -2,6 +2,7 @@
 {
     using System;
     using Newtonsoft.Json;
+    using System.Collections.Generic;
 
     public partial class JsonData
     {
@@ -27,7 +28,7 @@
         public string HtmlContent { get; set; }
 
         [JsonProperty("comments", NullValueHandling = NullValueHandling.Ignore)]
-        public Comment[] Comments { get; set; }
+        public List<Comment> Comments { get; set; }
     }
 
     public partial class Comment

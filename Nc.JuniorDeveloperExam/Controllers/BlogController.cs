@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
+using System.Collections.Generic;
 using System.Net;
 using Microsoft.AspNetCore.Mvc;
 using Nc.JuniorDeveloperExam.Models;
@@ -43,13 +43,15 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             //add the new comment
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
-            if(blogPost.GetType().GetProperty("Comments") == null)
+            //if(blogPost.GetType().GetProperty("Comments") == null)
+            try
             {
-                blogPost.Comments = new Comment[] { comment };
-            } else
+                blogPost.Comments.Add(comment);
+            }
+            catch
             {
-                // error: throwing 'index out of range' (which it is...)
-                blogPost.Comments[blogPost.Comments.Length + 1] = comment;
+                blogPost.Comments = new List<Comment>();
+                blogPost.Comments.Add(comment);
             }
 
             //re-serialize back to json
