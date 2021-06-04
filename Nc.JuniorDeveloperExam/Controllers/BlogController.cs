@@ -49,7 +49,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             //add the new comment
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
-            //if(blogPost.GetType().GetProperty("Comments") == null)
+
             try
             {
                 blogPost.Comments.Add(comment);
