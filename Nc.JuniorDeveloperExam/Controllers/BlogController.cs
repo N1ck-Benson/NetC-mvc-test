@@ -8,13 +8,7 @@ using Newtonsoft.Json;
 namespace Nc.JuniorDeveloperExam.Controllers
 {
     public class BlogController : Controller
-    {
-        //GET: /blog/home/
-        public ActionResult Home()
-        {
-            return View();
-        }
-
+    {   
         // GET: /blog/blogpost/{id}
         public ActionResult BlogPost(int id)
         {

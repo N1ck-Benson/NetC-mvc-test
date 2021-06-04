@@ -50,10 +50,8 @@ namespace Nc.JuniorDeveloperExam
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=BlogController}/{action=Home}");
-                endpoints.MapControllerRoute(
-                    name: "blogPost",
-                    pattern: "{controller=BlogController}/{action=BlogPost}/{id=1}");
+                    pattern: "{controller}/{action}/{id}",
+                    defaults: new { controller = "blog", action = "blogpost", id = "1"});
             });
         }
     }
