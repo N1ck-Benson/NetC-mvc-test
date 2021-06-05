@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.AspNetCore.Http;
+using JavaScriptEngineSwitcher.V8;
+using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
+using React.AspNet;
 
 namespace Nc.JuniorDeveloperExam
 {
@@ -23,7 +22,12 @@ namespace Nc.JuniorDeveloperExam
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddReact();
+            services.AddJsEngineSwitcher(options => options.DefaultEngineName = V8JsEngine.EngineName)
+                .AddV8();
             services.AddControllersWithViews();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -40,6 +44,13 @@ namespace Nc.JuniorDeveloperExam
                 app.UseHsts();
             }
             app.UseHttpsRedirection();
+
+            app.UseReact(config =>
+            {
+                config.AddScript("~js/BlogPost.jsx");
+                config.AddScript("~js/Comments.jsx");
+            });
+
             app.UseStaticFiles();
 
             app.UseRouting();
@@ -50,10 +61,8 @@ namespace Nc.JuniorDeveloperExam
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=BlogController}/{action=Home}");
-                endpoints.MapControllerRoute(
-                    name: "blogPost",
-                    pattern: "{controller=BlogController}/{action=BlogPost}/{id=1}");
+                    pattern: "{controller}/{action}/{id}",
+                    defaults: new { controller = "blog", action = "blogpost", id = "1"});
             });
         }
     }

@@ -1,4 +1,5 @@
 ﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using React.AspNet
 
 <!DOCTYPE html>
 <html>
@@ -6,8 +7,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NetConstruct Blog</title>
-    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="~/css/site.css"/>
+    <link rel="stylesheet" type="text/css" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="~/css/site.css" />
 </head>
 <body>
     <!-- Navigation -->
@@ -33,5 +34,10 @@
     <div class="mt-5"></div>
     <div class="mt-5"></div>
     @RenderBody()
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/16.13.0/umd/react.development.js"></script>
+    <script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.13.0/umd/react-dom.development.js"></script>
+    <script src="@Url.Content("~/js/BlogPost.jsx")"></script>
+    <script src="@Url.Content("~/js/Comments.jsx")"></script>
+    @Html.ReactInitJavaScript()
 </body>
 </html>

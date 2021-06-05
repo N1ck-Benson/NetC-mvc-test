@@ -8,20 +8,14 @@ using Newtonsoft.Json;
 namespace Nc.JuniorDeveloperExam.Controllers
 {
     public class BlogController : Controller
-    {
-        //GET: /blog/home/
-        public ActionResult Home()
-        {
-            return View();
-        }
-
+    {   
         // GET: /blog/blogpost/{id}
         public ActionResult BlogPost(int id)
         {
 
             // The WebClient class is using System.Net.    
-            // It "provides common methods for sending data to and receiving data from a resource identified by a URI".
-            // Could have used System.IO but couldn't make it work for some reason...
+            // WebClient "provides common methods for sending data to and receiving data from a resource identified by a URI".
+            // Could also use System.IO for this.
 
             var webClient = new WebClient();
 
@@ -55,7 +49,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
 
             //add the new comment
             BlogPost blogPost = jsonData.BlogPosts[id - 1];
-            //if(blogPost.GetType().GetProperty("Comments") == null)
+
             try
             {
                 blogPost.Comments.Add(comment);
@@ -72,7 +66,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
             // write json back to Blog-Posts.json
             System.IO.File.WriteAllText(@"../Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json", json);
 
-            return RedirectToRoute(new { controller = "Blog", action = "BlogPost", id = id });
+            return StatusCode(202);
         }
     }
 }
