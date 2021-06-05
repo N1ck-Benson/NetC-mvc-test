@@ -66,7 +66,7 @@ namespace Nc.JuniorDeveloperExam.Controllers
             // write json back to Blog-Posts.json
             System.IO.File.WriteAllText(@"../Nc.JuniorDeveloperExam/App_Data/Blog-Posts.json", json);
 
-            return RedirectToRoute(new { controller = "Blog", action = "BlogPost", id = id });
+            return StatusCode(202);
         }
     }
 }

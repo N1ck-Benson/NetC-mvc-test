@@ -17,11 +17,11 @@
         const xhr = new XMLHttpRequest();
         xhr.open("post", `/blog/postcomment/${this.props.postId}`, true);
         //Re-render comments optimistically
-        xhr.onload = () => {
-            const newComments = this.state.comments.push(this.state.postedComment);
-            this.setState({ comments: newComments });
-        };
         xhr.send(request);
+        const newComments = this.state.comments.slice(0, -1);
+        const postedCommentString = JSON.stringify(this.state.postedComment);
+        newComments = newComments + "," + postedCommentString + "]";
+        this.setState({ comments: newComments });
     };
 
     onNameChange = ({ nativeEvent: { data } }) => {
@@ -71,7 +71,7 @@
                     <div className="card-body">
                         <div className="form-row">
                             <div className="form-group col-md-6">
-                                <label for="Name">Name</label>
+                                <label htmlFor="Name">Name</label>
                                 <input
                                     className="form-control"
                                     id="Name"
@@ -82,7 +82,7 @@
                                 />
                             </div>
                             <div className="form-group col-md-6">
-                                <label for="EmailAddress">Email Address</label>
+                                <label htmlFor="EmailAddress">Email Address</label>
                                 <input
                                     type="email"
                                     className="form-control"
@@ -95,7 +95,7 @@
                             </div>
                         </div>
                         <div className="form-group">
-                            <label for="Message">Message</label>
+                            <label htmlFor="Message">Message</label>
                             <textarea
                                 id="Message"
                                 name="Message"
@@ -116,25 +116,27 @@
                     </div>
                 </div>
                 {/* Comments thread */}
-                {!comments.length ? (
+                {!comments ? (
                     <div>Be the first to comment!</div>
                 ) : (
                         comments.map((comment) => {
+                            const { Name, Date, Message } = comment;
+                            const trimmedDate = Date.slice(0, Date.indexOf("T"));
                             return (
-                                <div class="media mb-4">
+                                <div class="media mb-4" key={Date}>
                                     <img
                                         class="d-flex mr-3 rounded-circle user-avatar"
                                         src={`https://eu.ui-avatars.com/api/?name=${comment.Name}`}
-                                        alt={comment.Name}
+                                        alt={Name}
                                     />
                                     <div class="media-body">
                                         <h5 class="mt-0">
-                                            {comment.Name}s
+                                            {comment.Name} &nbsp;
                     <small>
-                                                <em>({comment.Date})</em>
+                                                <em>({trimmedDate})</em>
                                             </small>
                                         </h5>
-                                        {comment.Message}
+                                        {Message}
                                     </div>
                                 </div>
                             );

@@ -23,10 +23,10 @@
 
         <!-- Blog post comment form -->
         @Html.React("Comments", new
-   {
-       postId = Model.Id,
-       comments = JsonSerializer.Serialize(Model.Comments),
-   })
+       {
+           postId = Model.Id,
+           comments = JsonSerializer.Serialize(Model.Comments),
+       })
 
         <!-- Blog post comments -->
         
