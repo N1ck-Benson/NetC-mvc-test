@@ -10,7 +10,7 @@ I instead started from scratch with an MVC template in ASP.NET Core for OS, and 
 
 2. I have spent most of my time doing the compulsory exercises (1-3), and put extra time into integration with React and validation.
 
-Within the React components, you will notice that an attempt has been made to optimistically render posted comments. For some reason these are not rendering, and I belive the issue is with the .NET controller. I would be very keen to discuss this and improve my understanding.
+Within the React components, you will notice that an attempt has been made to optimistically render posted comments. For some reason these are not rendering, and I believe the issue is with the .NET controller. I would be very keen to discuss this and improve my understanding.
 
 
 # NetConstruct Developer Assessment
