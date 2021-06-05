@@ -11,9 +11,9 @@
         this.setState({ buttonText: "Posted!" });
         const { name, email, message } = this.state.postedComment;
         const request = new FormData();
-        req.append("Name", name);
-        req.append("EmailAddress", email);
-        req.append("Message", message);
+        request.append("Name", name);
+        request.append("EmailAddress", email);
+        request.append("Message", message);
         const xhr = new XMLHttpRequest();
         xhr.open("post", `/blog/postcomment/${this.props.postId}`, true);
         //Re-render comments optimistically
