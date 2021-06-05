@@ -14,8 +14,8 @@ namespace Nc.JuniorDeveloperExam.Controllers
         {
 
             // The WebClient class is using System.Net.    
-            // It "provides common methods for sending data to and receiving data from a resource identified by a URI".
-            // Could have used System.IO but couldn't make it work for some reason...
+            // WebClient "provides common methods for sending data to and receiving data from a resource identified by a URI".
+            // Could also use System.IO for this.
 
             var webClient = new WebClient();
 

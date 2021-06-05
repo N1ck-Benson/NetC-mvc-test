@@ -1,5 +1,6 @@
 ﻿@model Nc.JuniorDeveloperExam.Models.BlogPost
 @using React.AspNet;
+@using System.Text.Json;
 @{
     Layout = "layout";
 }
@@ -16,43 +17,19 @@
         })
 
         <!-- Html string requires sanitation before it can be rendered in a React component -->
+        <!-- (In order to safeguard against XSS attacks) -->
         @Html.Raw(Model.HtmlContent)
+
 
         <!-- Blog post comment form -->
         @Html.React("Comments", new
-        {
-            comments = Model.Comments
-        })
+   {
+       postId = Model.Id,
+       comments = JsonSerializer.Serialize(Model.Comments),
+   })
 
         <!-- Blog post comments -->
-        <div>
-            <h3>Comments</h3>
-            @{
-                // try rendering the comments component with comments on props,
-                // catch nullrefexcep and return comments component with empty array. 
-                try
-                {
-                    foreach (var comment in Model.Comments)
-                    {
-                        <div class="media mb-4">
-                            <img class="d-flex mr-3 rounded-circle user-avatar" src="https://eu.ui-avatars.com/api/?name=Steven+Barker" alt="Steven Barker">
-                            <div class="media-body">
-                                <h5 class="mt-0">@comment.Name<small><em>(@comment.Date.ToString("MMMM d, yyyy"))</em></small></h5>
-                                @comment.Message
-                            </div>
-                        </div>
-                    }
-                }
-                catch (NullReferenceException)
-                {
-                    <div class="media mb-4">
-                        <div class="media-body">
-                            <h5 class="mt-0">This post has no comments</h5>
-                        </div>
-                    </div>
-                }
-            }
-        </div>
+        
     </div>
 </div>
 
