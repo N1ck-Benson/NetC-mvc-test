@@ -2,11 +2,13 @@
 
 Thank you for taking the time to look through this Assessment attempt! Please refer to the commit history for documentation of how I approached it.
 
-- Please note that I have not forked the original repo, because the files were set up for Windows, and I have only had access to a Mac whilst doing the exercises.
+A couple of notes:
+
+1. Please note that I have not forked the original repo, because the files were set up for Windows, and I have only had access to a Mac whilst doing the exercises.
 
 I instead started from scratch with an MVC template in ASP.NET Core for OS, and tried to align the setup as closely as I could with the original repo. I hope you understand!
 
-- I have spent most of my time doing the compulsory exercises (1-3), and put extra time into integration with React and validation.
+2. I have spent most of my time doing the compulsory exercises (1-3), and put extra time into integration with React and validation.
 
 Within the React components, you will notice that an attempt has been made to optimistically render posted comments. For some reason these are not rendering, and I belive the issue is with the .NET controller. I would be very keen to discuss this and improve my understanding.
 
